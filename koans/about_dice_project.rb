@@ -2,9 +2,17 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 # Implement a DiceSet Class here:
 #
-# class DiceSet
-#   code ...
-# end
+class DiceSet
+  attr_accessor :values
+
+  def roll(n)
+    arr = []
+    1.upto(n) do
+      arr << (1..6).to_a.sample
+    end
+    @values = arr
+  end
+end
 
 class AboutDiceProject < Neo::Koan
   def test_can_create_a_dice_set
@@ -16,7 +24,7 @@ class AboutDiceProject < Neo::Koan
     dice = DiceSet.new
 
     dice.roll(5)
-    assert dice.values.is_a?(Array), "should be an array"
+    assert dice.values.is_a?(Array), true
     assert_equal 5, dice.values.size
     dice.values.each do |value|
       assert value >= 1 && value <= 6, "value #{value} must be between 1 and 6"
